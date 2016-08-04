@@ -18,7 +18,7 @@ window.devToolsExtension ? window.devToolsExtension() : f => f)(createStore);
 const store = createStoreWithMiddleware(rootReducer);
 
 render(
-     <Provider store={store}}>
+     <Provider store={store}>
       <Router
           onUpdate={() => window.scrollTo(0, 0)}
           history={browserHistory}
