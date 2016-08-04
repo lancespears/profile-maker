@@ -8,14 +8,20 @@ import promise from 'redux-promise';
 import createLogger from 'redux-logger';
 const loggerMiddleware = createLogger();
 
-import App from './components/app';
-import reducers from './reducers';
+import rootReducer from './reducers/index';
+import routes from './routes';
+
 
 const createStoreWithMiddleware = compose(applyMiddleware(thunk, promise),
 window.devToolsExtension ? window.devToolsExtension() : f => f)(createStore);
 
+const store = createStoreWithMiddleware(rootReducer);
+
 render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
-    <App />
-  </Provider>
-  , document.getElementById('root'));
+     <Provider store={store}}>
+      <Router
+          onUpdate={() => window.scrollTo(0, 0)}
+          history={browserHistory}
+          routes={routes} />
+      </Provider>
+    , document.getElementById('root'));
