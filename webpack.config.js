@@ -9,10 +9,10 @@ module.exports = {
   devtool: 'eval-source-map',
   entry: [
     'webpack-hot-middleware/client?reload=true',
-    path.resolve(__dirname, 'src/index.js')
+    path.join(__dirname, 'src/index.js')
   ],
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.join(__dirname, 'dist'),
     filename: '[name].js',
     publicPath: '/'
   },
@@ -23,17 +23,15 @@ module.exports = {
 
   plugins: [
     new HtmlWebpackPlugin({
-      template: '/index.tpl.html',
+      template: 'index.tpl.html',
       inject: 'body',
       filename: 'index.html'
     }),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
-    new CopyWebpackPlugin([
-      { from: 'src/style/style.css' },
+    new CopyWebpackPlugin([{ from: 'src/style/style.css'},]),
 
-    ]),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development')
     }),

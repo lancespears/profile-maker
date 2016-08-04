@@ -1,0 +1,2 @@
+export const CREATE_CONTACT = 'CREATE_CONTACT';
+export const DELETE_CONTACT = 'DELETE_CONTACT';
