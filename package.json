@@ -1,0 +1,61 @@
+{
+  "name": "profile-maker",
+  "version": "1.0.0",
+  "description": "A profile maker where you can create and make edits to your profile picture, name, and description.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
+    "test:watch": "npm run test -- --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lancespears/profile-maker.git"
+  },
+  "keywords": [
+    "profile",
+    "react",
+    "redux",
+    "node",
+    "express"
+  ],
+  "author": "Lance Spears",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lancespears/profile-maker/issues"
+  },
+  "homepage": "https://github.com/lancespears/profile-maker#readme",
+  "dependencies": {
+    "axios": "^0.13.1",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-polyfill": "^6.9.1",
+    "babel-preset-stage-0": "^6.5.0",
+    "lodash": "^4.14.1",
+    "react": "^15.3.0",
+    "react-dom": "^15.3.0",
+    "react-router": "^2.6.1",
+    "redux": "^3.5.2",
+    "redux-promise": "^0.5.3",
+    "redux-thunk": "^2.1.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.11.4",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.11.1",
+    "chai": "^3.5.0",
+    "chai-jquery": "^2.0.0",
+    "eslint": "^3.2.2",
+    "eslint-plugin-react": "^6.0.0",
+    "jquery": "^3.1.0",
+    "jsdom": "^9.4.1",
+    "mocha": "^3.0.1",
+    "react-addons-test-utils": "^15.3.0",
+    "react-hot-loader": "^1.3.0",
+    "redux-logger": "^2.6.1",
+    "transfer-webpack-plugin": "^0.1.4",
+    "webpack": "^1.13.1",
+    "webpack-dev-middleware": "^1.6.1",
+    "webpack-dev-server": "^1.14.1",
+    "webpack-hot-middleware": "^2.12.2"
+  }
+}
