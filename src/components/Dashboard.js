@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-export default class App extends React.Component {
+export default class Dashboard extends React.Component {
   render() {
     return (
-      <div>App!</div>
+      <div>Dashboard!</div>
     );
   }
 }

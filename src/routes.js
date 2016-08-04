@@ -1,18 +1,17 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
-import Main from './components/Main';
-import Navigator from './components/Navigator';
-import Home from './components/Home';
+import App from './components/App';
+import Dashboard from './components/Dashboard';
 import Update from './components/Update';
 
 
 
 export default (
 
-<Route component={Main}>
-  <IndexRoute component={Home} />
-    <Route path="/" component={Home} />
+<Route component={App}>
+  <IndexRoute component={Dashboard} />
+    <Route path="/" component={Dashboard} />
     <Route path="/update" component={Update} />
 
 </Route>
