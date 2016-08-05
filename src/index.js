@@ -10,7 +10,7 @@ const loggerMiddleware = createLogger();
 
 import rootReducer from './reducers/index';
 import routes from './routes';
-
+import '../style/style.css';
 
 const createStoreWithMiddleware = compose(applyMiddleware(thunk, promise),
 window.devToolsExtension ? window.devToolsExtension() : f => f)(createStore);
