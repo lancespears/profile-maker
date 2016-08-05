@@ -44,7 +44,7 @@ export default class Dashboard extends React.Component {
           <Media.List>
             <Media.ListItem>
             <Media.Left>
-            <img width={200} height={200} src="/assets/thumbnail.png" alt="Photo"/>
+            <img width={175} height={175} src="/assets/thumbnail.png" alt="Photo"/>
             </Media.Left>
             <Media.Body>
 

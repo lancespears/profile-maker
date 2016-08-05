@@ -3,6 +3,11 @@ import { connect } from 'react-redux';
 import { fetchProfile } from '../actions/index';
 import Dashboard from '../components/Dashboard';
 
+const style = {
+  page: {
+    margin: 30,
+  },
+};
 
 @connect(state => ({
   profile: state.profiles.profile
@@ -15,11 +20,11 @@ export default class ProfileEach extends React.Component {
 
   render() {
     if(!this.props.profile) {
-      return <div> Loading...</div>;
+      return <h4 style={style.page}> Loading...</h4>;
     }
 
     return (
-        <div>
+        <div style={style.page}>
           <Dashboard
             data={this.props.profile[0]}
             dispose={this.props.params.id}

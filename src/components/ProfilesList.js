@@ -1,17 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import { Col, ListGroup, ListGroupItem, Badge, Button } from 'react-bootstrap';
+import { Col, ListGroup, ListGroupItem, Button } from 'react-bootstrap';
 
 
-const styles = {
-  badge: {
-    fontWeight: '500',
-    textTransform: 'lowercase',
-  },
-  backdrop: {
-    backgroundColor: '#333333',
-    opacity: '0.9',
+const style = {
+  backgrounds: {
+    backgroundColor: '#fafafa',
   },
 };
 
@@ -23,15 +18,9 @@ export default class ProfilesList extends React.Component{
   renderProfiles(){
       return this.props.data.map((profile) => {
       return (
-          <ListGroupItem
-            style={styles.backdrop}
-            key={profile.id}
-            >
+          <ListGroupItem style={style.backgrounds} key={profile.id}>
             <Link to={ "profiles/" + profile.id}>
-              <h4>{profile.title}
-              <Badge pullRight style={styles.badge}>
-              {profile.categories}
-              </Badge></h4>
+              <h4>{profile.name}</h4>
             </Link>
           </ListGroupItem>
         );
@@ -39,22 +28,16 @@ export default class ProfilesList extends React.Component{
     }
 
   render() {
-
     return (
           <Col sm={4} smOffset={4}>
-          <h4>Profiles</h4>
-          <br/>
-          <Link to="/profiles/new">
-            Add a Profile
-          </Link>
-          <hr/>
-          <ListGroup
-            style={styles.backdrop}
-            >
-            {this.renderProfiles()}
-          </ListGroup>
-
+              <h4>Profiles</h4>
+                  <br/>
+                    <Link to="/profiles/new">Add a Profile</Link>
+                    <hr/>
+                  <ListGroup style={style.backgrounds}>
+                  {this.renderProfiles()}
+               </ListGroup>
           </Col>
-          );
+        );
     }
 }
