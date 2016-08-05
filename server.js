@@ -1,3 +1,19 @@
+//Heroku Postgres
+var pg = require('pg');
+
+pg.defaults.ssl = true;
+pg.connect(process.env.DATABASE_URL, function(err, client) {
+  if (err) throw err;
+  console.log('Connected to postgres! Getting schemas...');
+
+  client
+    .query('SELECT table_schema,table_name FROM information_schema.tables;')
+    .on('row', function(row) {
+      console.log(JSON.stringify(row));
+    });
+});
+
+
 // Main starting point of the application
 require('babel-polyfill');
 require('babel-register');
@@ -19,20 +35,6 @@ var port = isDeveloping ? 4000 : process.env.PORT;
 
 // Database
 var db = require('./postgres_server/db/db');
-
-// var pg = require('pg');
-//
-// pg.defaults.ssl = true;
-// pg.connect(process.env.DATABASE_URL, function(err, client) {
-//   if (err) throw err;
-//   console.log('Connected to postgres! Getting schemas...');
-//
-//   client
-//     .query('SELECT table_schema,table_name FROM information_schema.tables;')
-//     .on('row', function(row) {
-//       console.log(JSON.stringify(row));
-//     });
-// });
 
 var router = express.Router();
 var profiles = express.Router();
