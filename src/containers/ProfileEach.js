@@ -27,7 +27,7 @@ export default class ProfileEach extends React.Component {
         <div style={style.page}>
           <ProfileShow
             data={this.props.profile[0]}
-            dispose={this.props.profile[0].id}
+            dispose={this.props.params.id}
               />
         </div>
       );
