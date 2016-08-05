@@ -1,9 +1,10 @@
-const express = require('express');
-const path = require('path');
-const Profiles = require('../models/profiles');
-const bodyParser = require('body-parser');
+var express = require('express');
+var path = require('path');
+var knex = require('../db/db');
+var Profiles = require('../models/profiles');
+var bodyParser = require('body-parser');
 
-const router = express.Router();
+var router = express.Router();
 
 module.exports = function (router) {
 
@@ -50,7 +51,7 @@ module.exports = function (router) {
   }
 
   router.delete('/', function (req, res) {
-    let rq = req.query;
+    var rq = req.query;
     if (rq && rq.id) {
       Profiles.deleteProfile(rq.id)
         .then(function (data) {

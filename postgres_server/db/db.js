@@ -1,7 +1,7 @@
-var config = require('../../knexfile.js');
-var pg = require('pg');
 var env = process.env.NODE_ENV || 'development';
-var db = require('knex')(config[env]);
+var config = require('../../knexfile.js');
+var knex = require('knex')(config[env]);
+var pg = require('pg');
 
 
 //Heroku postgres
@@ -20,7 +20,7 @@ pg.connect(process.env.DATABASE_URL, function(err, client) {
 
 
 // Export the db object, which will be able to make database connections
-module.exports = db;
+module.exports = knex;
 
 
 knex.migrate.latest([config]);
