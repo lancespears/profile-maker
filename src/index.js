@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from 'react-dom';
+import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
 import { Router, browserHistory } from 'react-router';
@@ -17,7 +17,7 @@ window.devToolsExtension ? window.devToolsExtension() : f => f)(createStore);
 
 const store = createStoreWithMiddleware(rootReducer);
 
-render(
+ReactDOM.render(
      <Provider store={store}>
       <Router
           onUpdate={() => window.scrollTo(0, 0)}

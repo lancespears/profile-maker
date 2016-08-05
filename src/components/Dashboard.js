@@ -1,35 +1,39 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../actions/index';
+import { deleteProfile } from '../actions/index';
 import { Grid, Row, Col, Image, Button, Panel, Media } from 'react-bootstrap';
 
 const style = {
   frontpage: {
     marginTop: 20,
   },
+  buttons: {
+    float: 'right',
+    borderRadius: '10px',
+    letterSpacing: '0.1em',
+  },
 };
 
-@connect(state => { 
-  profile: state.profiles.profile;
-}, actions)
+@connect(state => ({
+  profile: state.profiles.profile
+}), { deleteProfile })
 export default class Dashboard extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+  static contextTypes = {
+    router: PropTypes.object
+  };
 
 
-  // componentWillMount(){
-  //   this.props.fetchProfile(this.props.params.id);
-  // }
-  //
-  // onDeleteClick() {
-  //   this.props.deleteProfile(this.props.params.id);
-  // }
+  onDeleteClick() {
+    const one = this.props.dispose;
+    this.props.deleteProfile(one)
+      .then(() => {
+        this.context.router.push('/');
+      });
+    }
 
 
   render() {
-    const { profile } = this.props;
-    if( !profile ) { return <Grid><Panel>Loading...</Panel></Grid>; }
+    const profile = this.props.data;
 
     return (
       <div>
@@ -52,6 +56,13 @@ export default class Dashboard extends React.Component {
             </Media.ListItem>
             </Media.List>
             </Col>
+            <Button
+              bsStyle="danger"
+              bsSize="small"
+              style={style.buttons}
+              onClick={this.onDeleteClick.bind(this)}>
+                  Delete Profile
+            </Button>
             </Panel>
         </Row>
       </Grid>
