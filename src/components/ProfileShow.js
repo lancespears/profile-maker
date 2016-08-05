@@ -1,7 +1,9 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { deleteProfile } from '../actions/index';
+import { Link } from 'react-router';
+import { fetchProfile, deleteProfile } from '../actions/index';
 import { Grid, Row, Col, Image, Button, Panel, Media } from 'react-bootstrap';
+import '../../style/lance2.png';
 
 const style = {
   frontpage: {
@@ -16,8 +18,8 @@ const style = {
 
 @connect(state => ({
   profile: state.profiles.profile
-}), { deleteProfile })
-export default class Dashboard extends React.Component {
+}), { fetchProfile, deleteProfile })
+export default class ProfileShow extends React.Component {
   static contextTypes = {
     router: PropTypes.object
   };
@@ -44,7 +46,7 @@ export default class Dashboard extends React.Component {
           <Media.List>
             <Media.ListItem>
             <Media.Left>
-            <img width={175} height={175} src="/assets/thumbnail.png" alt="Photo"/>
+            <img width={175} height={175} src="lance2.png" alt="Photo"/>
             </Media.Left>
             <Media.Body>
 

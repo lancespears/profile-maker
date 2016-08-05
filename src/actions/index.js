@@ -27,18 +27,14 @@ function createProfile(props) {
     .then(
       payload => dispatch({
         type: CREATE_PROFILE,
-        payload: {
-          description: response.data.descripton,
-          name: response.data.name,
-          message: response.data.message
-        }
+        payload
       })
     );
 }
 
 function fetchProfile(id) {
   console.log('IDDD', id);
-  return dispatch => axios.get(`${ROOT_URL}/profiles`,{id} )
+  return dispatch => axios.get(`${ROOT_URL}/profiles?id=${id}`)
     .then(
       payload => dispatch({
         type: FETCH_PROFILE,
@@ -48,7 +44,7 @@ function fetchProfile(id) {
 }
 
 function updateProfile(id, props) {
-  return dispatch => axios.post(`${ROOT_URL}/profiles`, {id, props})
+  return dispatch => axios.post(`${ROOT_URL}/profiles?id=${id}`, props)
     .then(
       payload => dispatch({
         type: UPDATE_PROFILE,
@@ -58,7 +54,7 @@ function updateProfile(id, props) {
 }
 
 function deleteProfile(id) {
-  return dispatch => axios.delete(`${ROOT_URL}/profiles?=`, {id})
+  return dispatch => axios.delete(`${ROOT_URL}/profiles?id=${id}`)
     .then(
       payload => dispatch({
         type: DELETE_PROFILE,

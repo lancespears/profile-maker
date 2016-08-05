@@ -6,16 +6,15 @@ import Home from './components/Home';
 import Navigator from './components/Navigator';
 import ProfilesList from './containers/ProfilesIndex';
 import ProfileNew from './components/ProfileNew';
-import Dashboard from './containers/ProfileEach';
+import ProfileShow from './containers/ProfileEach';
 
 export default (
-<Route component={App}>
+<Route path="/" component={App}>
   <IndexRoute component={Home} />
-  <Route path="/" component={Home} />
+  <Route path="home" component={Home} />
 
   <IndexRoute component={ProfilesList} />
-  <Route path="profiles" component={ProfilesList}/>
   <Route path="profiles/new" component={ProfileNew} />
-  <Route path="profiles/:id" component={Dashboard} />
+  <Route path="profiles/:id" component={ProfileShow} />
 </Route>
 );

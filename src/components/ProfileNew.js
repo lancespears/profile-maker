@@ -39,7 +39,6 @@ function FieldGroup({ id, label, help, ...props }) {
   fields: ['name', 'description'],
   validate
 }, null, { createProfile })
-
 export default class ProfileNew extends React.Component {
   static propTypes = {
     fields: PropTypes.object.isRequired,
@@ -47,6 +46,10 @@ export default class ProfileNew extends React.Component {
     resetForm: PropTypes.func.isRequired,
     error: PropTypes.string,
   }
+
+  static contextTypes = {
+    router: PropTypes.object
+  };
 
   constructor(props) {
     super(props);
@@ -59,7 +62,6 @@ export default class ProfileNew extends React.Component {
    }
 
   onFileChange(e) {
-    alert('Hello', e);
     this.setState({
       file: e.target.files[0]
       });
@@ -67,7 +69,10 @@ export default class ProfileNew extends React.Component {
 
 
   handleFormSubmit(formProps) {
-    this.props.createProfile(formProps);
+    this.props.createProfile(formProps)
+    .then(() => {
+        this.context.router.push('/');
+      });
   }
 
 render() {
