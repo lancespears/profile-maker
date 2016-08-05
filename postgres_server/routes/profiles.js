@@ -2,9 +2,6 @@ const express = require('express');
 const path = require('path');
 const Profiles = require('../models/profiles');
 const bodyParser = require('body-parser');
-// var multer = require('multer');
-// var upload = multer({ dest: './uploads/' });
-// var fs = require('fs');
 
 const router = express.Router();
 
@@ -67,11 +64,6 @@ module.exports = function (router) {
     }
   });
 
-  //
-  // router.post('/photo', upload.single('upl'), function(req, res, next){
-  //   var name = fs.readFileSync(req.file.path);
-  //   res.status(200).send(req.file.filename);
-  // });
 
   // CATCH-ALL route
   router.get('/*', function (req, res) {

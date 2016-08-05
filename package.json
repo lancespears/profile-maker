@@ -2,12 +2,17 @@
   "name": "profile-maker",
   "version": "1.0.0",
   "description": "A profile maker where you can create and make edits to your profile picture, name, and description.",
-  "main": "index.js",
+  "main": "server.js",
+  "engines": {
+  "node": "6.0.0"
+},
   "scripts": {
-    "dev": "node server",
+
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
     "test:watch": "npm run test -- --watch",
-    "build": "rimraf dist && cross-env NODE_ENV=production webpack -p --config ./webpack.production.config.js --progress --profile --colors"
+    "postinstall": "rimraf dist && cross-env NODE_ENV=production webpack -p --config ./webpack.production.config.js --progress --profile --colors",
+    "start": "node server.js"
+
   },
   "repository": {
     "type": "git",
