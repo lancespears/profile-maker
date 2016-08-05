@@ -10,10 +10,8 @@ import {
 } from './types';
 
 
-const ROOT_URL = 'http://localhost:3000';
-
 function fetchProfiles() {
-  return dispatch => axios.get(`${ROOT_URL}/profiles`)
+  return dispatch => axios.get('/profiles')
     .then(
       payload => dispatch({
         type: FETCH_PROFILES,
@@ -23,7 +21,7 @@ function fetchProfiles() {
 }
 
 function createProfile(props) {
-  return dispatch => axios.post(`${ROOT_URL}/profiles`, props)
+  return dispatch => axios.post('/profiles', props)
     .then(
       payload => dispatch({
         type: CREATE_PROFILE,
@@ -33,8 +31,7 @@ function createProfile(props) {
 }
 
 function fetchProfile(id) {
-  console.log('IDDD', id);
-  return dispatch => axios.get(`${ROOT_URL}/profiles?id=${id}`)
+  return dispatch => axios.get('/profiles?id=' + id)
     .then(
       payload => dispatch({
         type: FETCH_PROFILE,
@@ -44,7 +41,7 @@ function fetchProfile(id) {
 }
 
 function updateProfile(id, props) {
-  return dispatch => axios.post(`${ROOT_URL}/profiles?id=${id}`, props)
+  return dispatch => axios.post('/profiles?id=' + id, props)
     .then(
       payload => dispatch({
         type: UPDATE_PROFILE,
@@ -54,7 +51,7 @@ function updateProfile(id, props) {
 }
 
 function deleteProfile(id) {
-  return dispatch => axios.delete(`${ROOT_URL}/profiles?id=${id}`)
+  return dispatch => axios.delete('/profiles?id=' + id)
     .then(
       payload => dispatch({
         type: DELETE_PROFILE,

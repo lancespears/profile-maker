@@ -4,43 +4,43 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const StatsPlugin = require('stats-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  devtool: 'eval-source-map',
   entry: [
-    'webpack-hot-middleware/client?reload=true',
     path.join(__dirname, 'src/index.js')
   ],
   output: {
-    path: path.join(__dirname, 'dist'),
-    filename: '[name].js',
+    path: path.join(__dirname, '/dist/'),
+    filename: '[name]-[hash].min.js',
     publicPath: '/'
   },
-  resolve: {
-    modulesDirectories: ['node_modules', './src'],
-    extensions: ['', '.js', '.jsx']
-  },
-
   plugins: [
-    new HtmlWebpackPlugin({
+new webpack.optimize.OccurenceOrderPlugin(),
+new HtmlWebpackPlugin({
       template: 'index.tpl.html',
       inject: 'body',
       filename: 'index.html'
     }),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
-    new CopyWebpackPlugin([
-      { from: 'style/style.css'},
-      { from: 'style/images', to: 'images' },
-    ]),
-
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('development')
+new ExtractTextPlugin('[name]-[hash].min.css'),
+new CopyWebpackPlugin([
+  { from: 'style/images', to: 'images' },
+]),
+new webpack.optimize.UglifyJsPlugin({
+      compressor: {
+        warnings: false,
+        screw_ie8: true
+      }
     }),
-
-  ],
+new StatsPlugin('webpack.stats.json', {
+      source: false,
+      modules: false
+    }),
+new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+    })
+],
   module: {
     loaders: [{
         test: /\.jsx?$/,
@@ -53,7 +53,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: "style-loader!css-loader"
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader', 'autoprefixer-loader')
       },
       {
         test: /\.html$/,
@@ -63,7 +63,9 @@ module.exports = {
         test: /\.(jpe?g|png|gif|svg)$/i,
         loader: ExtractTextPlugin.extract('url?limit=32000', 'img')
       },
-
 ]
-  }
+  },
+  postcss: [
+require('autoprefixer')
+]
 };
