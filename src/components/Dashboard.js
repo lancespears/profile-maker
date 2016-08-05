@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import * as actions from '../actions/index';
 import { Grid, Row, Col, Image, Button, Panel, Media } from 'react-bootstrap';
 
 const style = {
@@ -8,9 +9,28 @@ const style = {
   },
 };
 
-
+@connect(state => { 
+  profile: state.profiles.profile;
+}, actions)
 export default class Dashboard extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+
+  // componentWillMount(){
+  //   this.props.fetchProfile(this.props.params.id);
+  // }
+  //
+  // onDeleteClick() {
+  //   this.props.deleteProfile(this.props.params.id);
+  // }
+
+
   render() {
+    const { profile } = this.props;
+    if( !profile ) { return <Grid><Panel>Loading...</Panel></Grid>; }
+
     return (
       <div>
       <Grid>
@@ -23,8 +43,11 @@ export default class Dashboard extends React.Component {
             <img width={200} height={200} src="/assets/thumbnail.png" alt="Photo"/>
             </Media.Left>
             <Media.Body>
-            <Media.Heading>Media heading</Media.Heading>
-            <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
+
+            <Media.Heading>{profile.name}</Media.Heading>
+
+            <p>{profile.description}</p>
+
             </Media.Body>
             </Media.ListItem>
             </Media.List>

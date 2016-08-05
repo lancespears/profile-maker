@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
+import * as actions from '../actions/index';
 import { Grid, Row, Col, Image, Button, FormGroup, Form, ControlLabel, FormControl, Panel, Label, Input, HelpBlock } from 'react-bootstrap';
 
 const style = {
@@ -32,14 +33,11 @@ function FieldGroup({ id, label, help, ...props }) {
   );
 }
 
-
-
-
 @reduxForm({
   form: 'ProfileForm',
   fields: ['name', 'description'],
   validate
-})
+}, null, actions)
 
 export default class Update extends React.Component {
   static propTypes = {
@@ -52,6 +50,7 @@ export default class Update extends React.Component {
   constructor(props) {
     super(props);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.onFileChange = this.onFileChange.bind(this);
     //initial state
     this.state = ({
       file: ''
@@ -102,7 +101,7 @@ render() {
                 type="file"
                 label="Profile Photo"
                 help="Upload your profile photo here."
-                onChange={this.onFileChange.bind(this)}
+                onChange={this.onFileChange}
                 />
                 </FormGroup>
                 <hr/>

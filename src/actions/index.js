@@ -36,7 +36,6 @@ export function createProfile(props) {
       type: CREATE_PROFILE,
       payload: {
         profile: response.data.data,
-        message: response.data.message,
       }
     }));
 }
