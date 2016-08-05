@@ -14,6 +14,7 @@ export default (
   <Route path="/" component={Home} />
 
   <IndexRoute component={ProfilesList} />
+  <Route path="profiles" component={ProfilesList}/>
   <Route path="profiles/new" component={ProfileNew} />
   <Route path="profiles/:id" component={Dashboard} />
 </Route>

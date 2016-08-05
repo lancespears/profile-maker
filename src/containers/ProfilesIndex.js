@@ -4,6 +4,13 @@ import * as actions from '../actions/index';
 import { bindActionCreators } from 'redux';
 import ProfilesList from '../components/ProfilesList';
 
+const style = {
+  page: {
+    margin: 30,
+  },
+};
+
+
 
 @connect(state => ({
   profiles: state.profiles.all
@@ -17,11 +24,11 @@ export default class ProfilesIndex extends React.Component {
 
 render() {
   if(!this.props.profiles) {
-    return ( <div>>Loading...</div>);
+    return ( <div style={style.page}>Loading...</div>);
   }
 
   return (
-        <div>
+        <div style={style.page}>
         <ProfilesList
           data={this.props.profiles}
             />

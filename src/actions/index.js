@@ -5,14 +5,15 @@ import {
   FETCH_PROFILES,
   CREATE_PROFILE,
   FETCH_PROFILE,
+  UPDATE_PROFILE,
   DELETE_PROFILE,
 } from './types';
 
 
-const ROOT_URL = 'http://localhost:3000/profiles';
+const ROOT_URL = 'http://localhost:3000';
 
 function fetchProfiles() {
-  return dispatch => axios.get(`${ROOT_URL}`)
+  return dispatch => axios.get(`${ROOT_URL}/profiles`)
     .then(
       payload => dispatch({
         type: FETCH_PROFILES,
@@ -22,7 +23,7 @@ function fetchProfiles() {
 }
 
 function createProfile(props) {
-  return dispatch => axios.post(`${ROOT_URL}`, props)
+  return dispatch => axios.post(`${ROOT_URL}/profiles`, props)
     .then(
       payload => dispatch({
         type: CREATE_PROFILE,
@@ -36,7 +37,8 @@ function createProfile(props) {
 }
 
 function fetchProfile(id) {
-  return dispatch => axios.get(`${ROOT_URL}/${id}`)
+  console.log('IDDD', id);
+  return dispatch => axios.get(`${ROOT_URL}/profiles`,{id} )
     .then(
       payload => dispatch({
         type: FETCH_PROFILE,
@@ -45,8 +47,18 @@ function fetchProfile(id) {
     );
 }
 
+function updateProfile(id, props) {
+  return dispatch => axios.post(`${ROOT_URL}/profiles`, {id, props})
+    .then(
+      payload => dispatch({
+        type: UPDATE_PROFILE,
+        payload
+      })
+    );
+}
+
 function deleteProfile(id) {
-  return dispatch => axios.delete(`${ROOT_URL}?id=${id}`)
+  return dispatch => axios.delete(`${ROOT_URL}/profiles?=`, {id})
     .then(
       payload => dispatch({
         type: DELETE_PROFILE,
@@ -59,5 +71,6 @@ module.exports = {
   fetchProfiles,
   createProfile,
   fetchProfile,
+  updateProfile,
   deleteProfile,
 };
