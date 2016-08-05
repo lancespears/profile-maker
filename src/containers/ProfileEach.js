@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchProfile } from '../actions/index';
-import Dashboard from '../components/Dashboard';
+import ProfileShow from '../components/ProfileShow';
 
 const style = {
   page: {
@@ -25,9 +25,9 @@ export default class ProfileEach extends React.Component {
 
     return (
         <div style={style.page}>
-          <Dashboard
+          <ProfileShow
             data={this.props.profile[0]}
-            dispose={this.props.params.id}
+            dispose={this.props.profile[0].id}
               />
         </div>
       );

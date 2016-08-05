@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import { deleteProfile } from '../actions/index';
 import { Grid, Row, Col, Image, Button, Panel, Media } from 'react-bootstrap';
 
@@ -17,7 +18,7 @@ const style = {
 @connect(state => ({
   profile: state.profiles.profile
 }), { deleteProfile })
-export default class Dashboard extends React.Component {
+export default class ProfileShow extends React.Component {
   static contextTypes = {
     router: PropTypes.object
   };

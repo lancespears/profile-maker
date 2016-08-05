@@ -36,8 +36,8 @@ function createProfile(props) {
     );
 }
 
-function fetchProfile(id) {
-  console.log('IDDD', id);
+function fetchProfile({id}) {
+  console.log('IDDD', {id});
   return dispatch => axios.get(`${ROOT_URL}/profiles`,{id} )
     .then(
       payload => dispatch({
@@ -58,7 +58,7 @@ function updateProfile(id, props) {
 }
 
 function deleteProfile(id) {
-  return dispatch => axios.delete(`${ROOT_URL}/profiles?=`, {id})
+  return dispatch => axios.delete(`${ROOT_URL}/profiles?id=${id}`)
     .then(
       payload => dispatch({
         type: DELETE_PROFILE,

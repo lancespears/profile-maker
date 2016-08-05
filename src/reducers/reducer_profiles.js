@@ -1,7 +1,9 @@
 import {
   FETCH_PROFILES,
-  FETCH_PROFILE
+  FETCH_PROFILE,
+  DELETE_PROFILE
 } from '../actions/types';
+import _ from 'lodash';
 
 //set initial state to an empty object...or array
 // one for the list of profiles (all) and one for each profile
@@ -25,6 +27,8 @@ export default function (state = INITIAL_STATE, action) {
     return {...state,
       all: action.payload.data
     };
+  case DELETE_PROFILE:
+    return _.omit(state, action.payload);
   default:
     return state;
   }
