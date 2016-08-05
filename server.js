@@ -13,6 +13,7 @@ var webpack = require('webpack');
 var webpackMiddleware = require('webpack-dev-middleware');
 var webpackHotMiddleware = require('webpack-hot-middleware');
 var config = require('./webpack.config.js');
+require('dotenv').config();
 
 var isDeveloping = process.env.NODE_ENV !== 'production';
 var port = isDeveloping ? 4000 : process.env.PORT;
@@ -20,12 +21,13 @@ var port = isDeveloping ? 4000 : process.env.PORT;
 // Database
 var db = require('./postgres_server/db/db');
 
+// Express instance
+var app = express();
+
 var router = express.Router();
 var profiles = express.Router();
 require('./postgres_server/routes/profiles')(profiles);
 
-// Express instance
-var app = express();
 
 if (isDeveloping) {
   var compiler = webpack(config);
