@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { fetchProfile, deleteProfile } from '../actions/index';
 import { Grid, Row, Col, Image, Button, Panel, Media } from 'react-bootstrap';
-import '../../style/lance2.png';
 
 const style = {
   frontpage: {
@@ -46,7 +45,7 @@ export default class ProfileShow extends React.Component {
           <Media.List>
             <Media.ListItem>
             <Media.Left>
-            <img width={175} height={175} src="lance2.png" alt="Photo"/>
+            <Image width={175} height={175} src="image/lance2.png" alt="Photo"/>
             </Media.Left>
             <Media.Body>
 

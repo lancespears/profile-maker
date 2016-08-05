@@ -1,20 +1,49 @@
-const path = require('path');
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const webpack = require('webpack');
-const webpackMiddleware = require('webpack-dev-middleware');
-const webpackHotMiddleware = require('webpack-hot-middleware');
-const config = require('./webpack.config.js');
+// Main starting point of the application
+require('babel-polyfill');
+require('babel-register');
+var http = require('http');
+var path = require('path');
+var express = require('express');
+var compression = require('compression');
+var bodyParser = require('body-parser');
+var cors = require('cors');
+var logger = require('morgan');
+var errorhandler = require('errorhandler');
+var webpack = require('webpack');
+var webpackMiddleware = require('webpack-dev-middleware');
+var webpackHotMiddleware = require('webpack-hot-middleware');
+var config = require('./webpack.config.js');
 
-const isDeveloping = process.env.NODE_ENV !== 'production';
-const port = isDeveloping ? 4000 : process.env.PORT;
+var isDeveloping = process.env.NODE_ENV !== 'production';
+var port = isDeveloping ? 4000 : process.env.PORT;
 
-const app = express();
+// Database
+var db = require('./postgres_server/db/db');
+
+// var pg = require('pg');
+//
+// pg.defaults.ssl = true;
+// pg.connect(process.env.DATABASE_URL, function(err, client) {
+//   if (err) throw err;
+//   console.log('Connected to postgres! Getting schemas...');
+//
+//   client
+//     .query('SELECT table_schema,table_name FROM information_schema.tables;')
+//     .on('row', function(row) {
+//       console.log(JSON.stringify(row));
+//     });
+// });
+
+var router = express.Router();
+var profiles = express.Router();
+require('./postgres_server/routes/profiles')(profiles);
+
+// Express instance
+var app = express();
 
 if (isDeveloping) {
-  const compiler = webpack(config);
-  const middleware = webpackMiddleware(compiler, {
+  var compiler = webpack(config);
+  var middleware = webpackMiddleware(compiler, {
     publicPath: config.output.publicPath,
     contentBase: 'src',
     stats: {
@@ -27,10 +56,16 @@ if (isDeveloping) {
     }
   });
 
+  // App Setup
+  app.use(errorhandler());
+  app.use(logger('dev'));
   app.use(cors());
   app.use(bodyParser.json({ type: '*/*' }));
   app.use(middleware);
   app.use(webpackHotMiddleware(compiler));
+
+  // Routes
+  app.use('/profiles', profiles);
 
   app.get('*', function response(req, res) {
     res.write(middleware.fileSystem.readFileSync(path.join(__dirname, 'dist/index.html')));
@@ -43,8 +78,9 @@ if (isDeveloping) {
   });
 }
 
-
-app.listen(port, 'localhost', function onStart(err) {
+// Server Setup
+var server = http.createServer(app);
+server.listen(port, 'localhost', function onStart(err) {
   if (err) {
     console.log(err);
   }

@@ -2,7 +2,7 @@ module.exports = {
   development: {
     client: 'postgresql',
     connection: {
-      database: 'profile_Mkr',
+      database: 'profile_Maker',
       charset: 'utf8',
       debug: true,
     },
