@@ -9,56 +9,55 @@ import {
 } from './types';
 
 
-const ROOT_URL = 'http://localhost:3000';
+const ROOT_URL = 'http://localhost:3000/profiles';
 
-
-export function fetchProfiles() {
-  //action creator to fetch our list of profiles
-  const request = axios.get(`${ROOT_URL}/profiles`);
-  return {
-    type: FETCH_PROFILES,
-    payload: request
-  };
+function fetchProfiles() {
+  return dispatch => axios.get(`${ROOT_URL}`)
+    .then(
+      payload => dispatch({
+        type: FETCH_PROFILES,
+        payload
+      })
+    );
 }
 
-
-export function createProfile(props) {
-  const request = axios.post(`${ROOT_URL}/profiles`, props);
-  return {
-    type: CREATE_PROFILE,
-    payload: request
-  };
-}
-
-export function createProfile(props) {
+function createProfile(props) {
   return dispatch => axios.post(`${ROOT_URL}`, props)
-    .then(response => dispatch({
-      type: CREATE_PROFILE,
-      payload: {
-        profile: response.data.data,
-        message: response.data.message,
-      }
-    }));
+    .then(
+      payload => dispatch({
+        type: CREATE_PROFILE,
+        payload: {
+          description: response.data.descripton,
+          name: response.data.name,
+          message: response.data.message
+        }
+      })
+    );
 }
 
-
-
-
-
-
-export function fetchProfile(id) {
-  const request = axios.get(`${ROOT_URL}/profiles/${id}`);
-  return {
-    type: FETCH_PROFILE,
-    payload: request
-  };
+function fetchProfile(id) {
+  return dispatch => axios.get(`${ROOT_URL}/${id}`)
+    .then(
+      payload => dispatch({
+        type: FETCH_PROFILE,
+        payload
+      })
+    );
 }
 
-
-export function deleteProfile(id) {
-  const request = axios.delete(`${ROOT_URL}/profiles/${id}`);
-  return {
-    type: DELETE_PROFILE,
-    payload: request
-  };
+function deleteProfile(id) {
+  return dispatch => axios.delete(`${ROOT_URL}?id=${id}`)
+    .then(
+      payload => dispatch({
+        type: DELETE_PROFILE,
+        payload
+      })
+    );
 }
+
+module.exports = {
+  fetchProfiles,
+  createProfile,
+  fetchProfile,
+  deleteProfile,
+};

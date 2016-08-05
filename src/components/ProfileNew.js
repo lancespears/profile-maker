@@ -1,7 +1,9 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
+import { createProfile } from '../actions/index';
 import { Grid, Row, Col, Image, Button, FormGroup, Form, ControlLabel, FormControl, Panel, Label, Input, HelpBlock } from 'react-bootstrap';
+import PhotoUpload from '../containers/Dropzone';
 
 const style = {
   backgrounds: {
@@ -32,16 +34,13 @@ function FieldGroup({ id, label, help, ...props }) {
   );
 }
 
-
-
-
 @reduxForm({
   form: 'ProfileForm',
   fields: ['name', 'description'],
   validate
-})
+}, null, { createProfile })
 
-export default class Update extends React.Component {
+export default class ProfileNew extends React.Component {
   static propTypes = {
     fields: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func.isRequired,
@@ -52,6 +51,7 @@ export default class Update extends React.Component {
   constructor(props) {
     super(props);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.onFileChange = this.onFileChange.bind(this);
     //initial state
     this.state = ({
       file: ''
@@ -59,9 +59,10 @@ export default class Update extends React.Component {
    }
 
   onFileChange(e) {
+    alert('Hello', e);
     this.setState({
       file: e.target.files[0]
-    });
+      });
   }
 
 
@@ -81,7 +82,8 @@ render() {
 
          <Form onSubmit={handleSubmit(this.handleFormSubmit)}>
 
-           <FormGroup bsSize="small" controlId="formControlsName" validationState={ name.touched && name.error ? 'error' : ''}>
+           <FormGroup bsSize="small" controlId="formControlsName" >
+           {/* validationState={ name.touched && name.error ? 'error' : ''}> */}
              <ControlLabel>What is your name?</ControlLabel>
              <FormControl {...name} type="text" placeholder="First Name Last Name"/>
              {name.touched && name.error &&
@@ -90,28 +92,35 @@ render() {
              </FormGroup>
 
 
-           <FormGroup bsSize="small" controlId="formControlsDescription" validationState={ description.touched && description.error ? 'error' : ''}>
+           <FormGroup bsSize="small" controlId="formControlsDescription">
+           {/* validationState={ description.touched && description.error ? 'error' : ''}> */}
              <ControlLabel srOnly={true}/>
              <FormControl {...description} type="text" componentClass="textarea" rows='5' placeholder="Share me a brief description about yourself..." />
              {description.touched && description.error && <div className="text text-danger">{description.error}</div>}
               </FormGroup>
 
-              <FormGroup>
-                <FieldGroup
-                id="formControlsFile"
-                type="file"
-                label="Profile Photo"
-                help="Upload your profile photo here."
-                onChange={this.onFileChange.bind(this)}
-                />
-                </FormGroup>
-                <hr/>
 
+                <hr/>
 
             <Button bsSize="small" type="submit">Submit</Button>&nbsp;
             <Button bsSize="small" onClick={resetForm}>Clear</Button>
           </Form>
         </Panel>
+        </Col>
+
+        <Col xs={6} md={6}>
+          <Panel style={style.backgrounds}>
+          <FormGroup>
+            {/* <FieldGroup
+            id="formControlsFile"
+            type="file"
+            label="Profile Photo"
+            help="Upload your profile photo here."
+            onChange={this.onFileChange}
+            /> */}
+            <PhotoUpload/>
+            </FormGroup>
+          </Panel>
         </Col>
       </Row>
     </Grid>
