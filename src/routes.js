@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
-import App from './components/App';
+import Main from './components/Main';
 import Home from './components/Home';
 import Navigator from './components/Navigator';
 import ProfilesList from './containers/ProfilesIndex';
@@ -9,8 +9,8 @@ import ProfileNew from './components/ProfileNew';
 import ProfileShow from './containers/ProfileEach';
 
 export default (
-<Route path="/" component={App}>
-  <IndexRoute component={Home} />
+<Route path="/" component={Main}>
+  <IndexRoute component={Navigator} />
   <Route path="home" component={Home} />
 
   <IndexRoute component={ProfilesList} />
