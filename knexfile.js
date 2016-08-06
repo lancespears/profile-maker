@@ -1,4 +1,4 @@
-// require('dotenv').config();
+require('dotenv').config();
 
 module.exports = {
   development: {
@@ -11,7 +11,12 @@ module.exports = {
   },
   production: {
     client: 'pg',
-    connection: "dbname=ddnthf6v45n7q9 host=ec2-54-243-203-98.compute-1.amazonaws.com port=5432 user=qlwtzhzjjsaaey password=zZhyoTGHi-dGPqDcXypIN5LzSF sslmode=require"
-
+    connection: {
+      url: process.env.DATABASE_URL + '?ssl=true',
+      host: process.env.RDS_DBHOST,
+      database: process.env.RDS_DBNAME,
+      user: process.env.RDS_USERNAME,
+      password: process.env.RDS_PASSWORD
+    },
   }
 };
