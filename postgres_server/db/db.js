@@ -1,5 +1,5 @@
-// var pg = require('pg');
-// pg.defaults.ssl = true;
+var pg = require('pg');
+pg.defaults.ssl = true;
 
 var env = process.env.NODE_ENV || 'development';
 var config = require('../../knexfile.js');
