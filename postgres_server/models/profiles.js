@@ -1,7 +1,7 @@
-const knex = require('../db/db');
+var pg = require('pg');
+var knex = require('../db/db');
 
-const Profiles = module.exports;
-
+var Profiles = module.exports;
 
 Profiles.createProfile = function (data) {
   return knex('profiles').returning('id')
