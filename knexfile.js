@@ -12,9 +12,7 @@ module.exports = {
   production: {
     client: 'pg',
     connection: {
-      url: process.env.DATABASE_URL,
-      // + '?ssl=true',
-      ssl: true,
+      url: process.env.DATABASE_URL + '?ssl=true',
       host: process.env.RDS_DBHOST,
       database: process.env.RDS_DBNAME,
       user: process.env.RDS_USERNAME,

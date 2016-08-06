@@ -1,7 +1,7 @@
 // Main starting point of the application
 require('babel-polyfill');
 require('babel-register');
-// var http = require('http');
+var http = require('http');
 var path = require('path');
 var express = require('express');
 var compression = require('compression');
@@ -67,8 +67,8 @@ if (isDeveloping) {
 }
 
 // Server Setup
-// var server = http.createServer(app);
-app.listen(port, 'localhost', function onStart(err) {
+var server = http.createServer(app);
+server.listen(port, 'localhost', function onStart(err) {
   if (err) {
     console.log(err);
   }
