@@ -16,7 +16,7 @@ var config = require('./webpack.config.js');
 // require('dotenv').config();
 
 var isDeveloping = process.env.NODE_ENV !== 'production';
-var port = isDeveloping ? 5432 : process.env.PORT;
+var port = isDeveloping ? 4000 : process.env.PORT;
 
 // Database
 var db = require('./postgres_server/db/db');
