@@ -13,7 +13,7 @@ var webpack = require('webpack');
 var webpackMiddleware = require('webpack-dev-middleware');
 var webpackHotMiddleware = require('webpack-hot-middleware');
 var config = require('./webpack.config.js');
-require('dotenv').config();
+// require('dotenv').config();
 
 var isDeveloping = process.env.NODE_ENV !== 'production';
 var port = isDeveloping ? 5432 : process.env.PORT;
@@ -28,6 +28,12 @@ var router = express.Router();
 var profiles = express.Router();
 require('./postgres_server/routes/profiles')(profiles);
 
+// App Setup
+app.use(errorhandler());
+app.use(logger('dev'));
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json({ type: '*/*' }));
 
 if (isDeveloping) {
   var compiler = webpack(config);
@@ -43,18 +49,8 @@ if (isDeveloping) {
       modules: false
     }
   });
-
-  // App Setup
-  app.use(errorhandler());
-  app.use(logger('dev'));
-  app.use(cors());
-  app.use(bodyParser.json({ type: '*/*' }));
   app.use(middleware);
   app.use(webpackHotMiddleware(compiler));
-
-  // Routes
-  app.use('/profiles', profiles);
-
   app.get('*', function response(req, res) {
     res.write(middleware.fileSystem.readFileSync(path.join(__dirname, 'dist/index.html')));
     res.end();
@@ -65,6 +61,9 @@ if (isDeveloping) {
     res.sendFile(path.join(__dirname, 'dist/index.html'));
   });
 }
+
+// Routes
+app.use('/profiles', profiles);
 
 // Server Setup
 var server = http.createServer(app);
