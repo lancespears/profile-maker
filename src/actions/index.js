@@ -31,7 +31,7 @@ function createProfile(props) {
 }
 
 function fetchProfile(id) {
-  return dispatch => axios.get('/profiles?id=' + id)
+  return dispatch => axios.get('/profiles/' + id)
     .then(
       payload => dispatch({
         type: FETCH_PROFILE,

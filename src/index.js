@@ -12,16 +12,21 @@ import rootReducer from './reducers/index';
 import routes from './routes';
 import '../style/style.css';
 
-const createStoreWithMiddleware = compose(applyMiddleware(thunk, promise),
-window.devToolsExtension ? window.devToolsExtension() : f => f)(createStore);
+
+//to use dev tools, comment this line out and uncomment the section below:
+const createStoreWithMiddleware = applyMiddleware(thunk, promise)(createStore);
+
+// to use dev tools, uncomment this:
+// const createStoreWithMiddleware = compose(applyMiddleware(thunk, promise, loggerMiddleware),
+// window.devToolsExtension ? window.devToolsExtension() : f => f)(createStore);
 
 const store = createStoreWithMiddleware(rootReducer);
 
 ReactDOM.render(
      <Provider store={store}>
       <Router
-          onUpdate={() => window.scrollTo(0, 0)}
           history={browserHistory}
+          onUpdate={() => window.scrollTo(0, 0)}
           routes={routes} />
       </Provider>
     , document.getElementById('root'));

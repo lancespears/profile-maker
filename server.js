@@ -1,6 +1,4 @@
 // Main starting point of the application
-require('babel-polyfill');
-require('babel-register');
 var http = require('http');
 var path = require('path');
 var express = require('express');
@@ -13,16 +11,15 @@ var webpack = require('webpack');
 var webpackMiddleware = require('webpack-dev-middleware');
 var webpackHotMiddleware = require('webpack-hot-middleware');
 var config = require('./webpack.config.js');
-// require('dotenv').config();
 
 var isDeveloping = process.env.NODE_ENV !== 'production';
 var port = isDeveloping ? 4000 : process.env.PORT;
 
-// Database
-var db = require('./postgres_server/db/db');
-
 // Express instance
 var app = express();
+
+// Database
+var db = require('./postgres_server/db/db');
 
 var router = express.Router();
 var profiles = express.Router();
@@ -32,9 +29,11 @@ require('./postgres_server/routes/profiles')(profiles);
 app.use(errorhandler());
 app.use(logger('dev'));
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({ type: '*/*' }));
+// Routes
+app.use('/profiles', profiles);
 
+//webpack middleware when in development
 if (isDeveloping) {
   var compiler = webpack(config);
   var middleware = webpackMiddleware(compiler, {
@@ -61,9 +60,6 @@ if (isDeveloping) {
     res.sendFile(path.join(__dirname, 'dist/index.html'));
   });
 }
-
-// Routes
-app.use('/profiles', profiles);
 
 // Server Setup
 var server = http.createServer(app);

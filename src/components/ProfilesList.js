@@ -3,20 +3,18 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { Col, ListGroup, ListGroupItem, Button } from 'react-bootstrap';
 
-
 const style = {
   backgrounds: {
     backgroundColor: '#fafafa',
   },
 };
-
 export default class ProfilesList extends React.Component{
 
   renderProfiles(){
-      return this.props.data.map((profile) => {
+    return this.props.profiles.map((profile) => {
       return (
           <ListGroupItem style={style.backgrounds} key={profile.id}>
-            <Link to={ "/profiles/" + profile.id}>
+            <Link to={ "profiles/" + profile.id}>
               <h4>{profile.name}</h4>
             </Link>
           </ListGroupItem>

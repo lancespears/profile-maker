@@ -10,27 +10,25 @@ const style = {
   },
 };
 
-
-
 @connect(state => ({
   profiles: state.profiles.all
 }), actions)
 export default class ProfilesIndex extends React.Component {
-
   componentWillMount() {
     this.props.fetchProfiles();
   }
 
-
 render() {
-  if(!this.props.profiles) {
+  const { profiles } = this.props;
+
+  if(!profiles) {
     return ( <div style={style.page}>Loading...</div>);
   }
 
   return (
         <div style={style.page}>
         <ProfilesList
-          data={this.props.profiles}
+          profiles={profiles}
             />
       </div>
     );
