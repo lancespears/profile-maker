@@ -1,7 +1,5 @@
 var express = require('express');
 var path = require('path');
-var pg = require('pg');
-var knex = require('../db/db');
 var Profiles = require('../models/profiles');
 var bodyParser = require('body-parser');
 

@@ -16,9 +16,8 @@ export default class Navigator extends React.Component {
           </Navbar.Header>
           <Navbar.Collapse>
             <Nav bsStyle="tabs" pullRight>
-            <IndexLinkContainer to="/"><NavItem eventKey={1}>Home</NavItem></IndexLinkContainer>
-            <LinkContainer to="/profiles/:id"><NavItem eventKey={2}>Dashboard</NavItem></LinkContainer>
-            <LinkContainer to="/profiles/new"><NavItem eventKey={3}>Update</NavItem></LinkContainer>
+            <IndexLinkContainer to="/"><NavItem eventKey={1}>Profiles</NavItem></IndexLinkContainer> */}
+            <LinkContainer to="/profiles/new"><NavItem eventKey={2}>Add Profile</NavItem></LinkContainer>
             </Nav>
           </Navbar.Collapse>
         </Navbar>

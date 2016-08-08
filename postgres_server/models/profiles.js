@@ -1,4 +1,3 @@
-var pg = require('pg');
 var knex = require('../db/db');
 
 var Profiles = module.exports;
@@ -9,7 +8,7 @@ Profiles.createProfile = function (data) {
     .insert({
       name: data.name,
       description: data.description,
-      photo: data.file
+      // TODO: photo: data.file
     })
     .then(function (record) {
       return record[0];

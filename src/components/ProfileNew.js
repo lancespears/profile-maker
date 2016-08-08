@@ -88,7 +88,6 @@ render() {
          <Form onSubmit={handleSubmit(this.handleFormSubmit)}>
 
            <FormGroup bsSize="small" controlId="formControlsName" >
-           {/* validationState={ name.touched && name.error ? 'error' : ''}> */}
              <ControlLabel>What is your name?</ControlLabel>
              <FormControl {...name} type="text" placeholder="First Name Last Name"/>
              {name.touched && name.error &&
@@ -98,7 +97,6 @@ render() {
 
 
            <FormGroup bsSize="small" controlId="formControlsDescription">
-           {/* validationState={ description.touched && description.error ? 'error' : ''}> */}
              <ControlLabel srOnly={true}/>
              <FormControl {...description} type="text" componentClass="textarea" rows='5' placeholder="Share me a brief description about yourself..." />
              {description.touched && description.error && <div className="text text-danger">{description.error}</div>}
@@ -116,13 +114,6 @@ render() {
         <Col xs={6} md={6}>
           <Panel style={style.backgrounds}>
           <FormGroup>
-            {/* <FieldGroup
-            id="formControlsFile"
-            type="file"
-            label="Profile Photo"
-            help="Upload your profile photo here."
-            onChange={this.onFileChange}
-            /> */}
             <PhotoUpload/>
             </FormGroup>
           </Panel>

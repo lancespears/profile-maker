@@ -15,10 +15,11 @@ const style = {
 export default class ProfileEach extends React.Component {
 
   componentWillMount(){
-    this.props.fetchProfile(this.props.params.id);
+    this.props.fetchProfile(this.props.params._id);
   }
 
   render() {
+
     if(!this.props.profile) {
       return <h4 style={style.page}> Loading...</h4>;
     }
@@ -27,7 +28,7 @@ export default class ProfileEach extends React.Component {
         <div style={style.page}>
           <ProfileShow
             data={this.props.profile[0]}
-            dispose={this.props.params.id}
+            dispose={this.props.params._id}
               />
         </div>
       );

@@ -10,8 +10,6 @@ import ProfileShow from './containers/ProfileEach';
 
 export default (
 <Route path="/" component={Main}>
-  <IndexRoute component={Navigator} />
-  <Route path="home" component={Home} />
 
   <IndexRoute component={ProfilesList} />
   <Route path="profiles/new" component={ProfileNew} />
